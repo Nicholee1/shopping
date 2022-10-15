@@ -1,5 +1,6 @@
 package org.learning.shopping.api;
 
+import io.swagger.annotations.Api;
 import org.learning.shopping.entity.ProductInfo;
 import org.learning.shopping.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Api
 public class ProductController {
 
     @Autowired
