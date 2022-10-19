@@ -4,6 +4,8 @@ import org.learning.shopping.Repository.ProductInfoRepository;
 import org.learning.shopping.entity.ProductInfo;
 import org.learning.shopping.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductInfo> findAll() {
-        return productInfoRepository.findAll();
+    public Page<ProductInfo> findAll(Pageable pageable) {
+        return productInfoRepository.findAllByOrderByProductId(pageable);
     }
 }

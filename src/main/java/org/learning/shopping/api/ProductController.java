@@ -4,9 +4,10 @@ import io.swagger.annotations.Api;
 import org.learning.shopping.entity.ProductInfo;
 import org.learning.shopping.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,8 +24,10 @@ public class ProductController {
     }
 
     @GetMapping("/product")
-    public List<ProductInfo> findAll(){
+    public Page<ProductInfo> findAll(@RequestParam(value = "page",defaultValue="1") Integer page,
+                                     @RequestParam(value = "size",defaultValue="3") Integer size){
+        PageRequest pageRequest= PageRequest.of(page-1,size);
 
-        return productService.findAll();
+        return productService.findAll(pageRequest);
     }
 }
