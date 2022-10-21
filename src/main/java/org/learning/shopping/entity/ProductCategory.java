@@ -32,4 +32,11 @@ public class ProductCategory implements Serializable {
     @UpdateTimestamp
     private LocalDateTime updateTime;
 
+    public ProductCategory() {
+    }
+
+    public ProductCategory(String categoryName, Integer categoryType) {
+        this.categoryName = categoryName;
+        this.categoryType = categoryType;
+    }
 }

@@ -11,4 +11,6 @@ public interface ProductService {
      ProductInfo findOne(String productId);
 
      Page<ProductInfo> findAll(Pageable pageable);
+
+     Page<ProductInfo> findAllInCategory(Integer categoryType,Pageable pageable);
 }

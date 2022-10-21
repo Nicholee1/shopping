@@ -8,7 +8,7 @@ import java.util.List;
 public interface ProductCategoryRepository extends JpaRepository<ProductCategory,Integer> {
 
     //all category
-    List<ProductCategory> findAllByOrderByCategory();
+    List<ProductCategory> findAllByOrderByCategoryType();
 
-
+    ProductCategory findAllByCategoryType(Integer categoryType);
 }
