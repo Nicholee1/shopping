@@ -1,4 +1,4 @@
-package vo.response;
+package org.learning.shopping.vo.response;
 
 import org.learning.shopping.entity.ProductInfo;
 import org.springframework.data.domain.Page;
