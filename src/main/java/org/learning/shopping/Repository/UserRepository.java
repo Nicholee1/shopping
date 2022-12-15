@@ -7,7 +7,7 @@ import java.util.Collection;
 
 
 
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String email);
     Collection<User> findAllByRole(String role);
 
