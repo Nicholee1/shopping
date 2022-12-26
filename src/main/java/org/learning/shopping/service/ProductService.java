@@ -13,4 +13,10 @@ public interface ProductService {
      Page<ProductInfo> findAll(Pageable pageable);
 
      Page<ProductInfo> findAllInCategory(Integer categoryType,Pageable pageable);
+
+     ProductInfo save(ProductInfo productInfo);
+
+     ProductInfo update(ProductInfo productInfo);
+
+     void delete(String id);
 }
