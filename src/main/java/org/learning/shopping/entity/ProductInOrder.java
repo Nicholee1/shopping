@@ -11,6 +11,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -18,7 +19,6 @@ import java.math.BigDecimal;
 public class ProductInOrder implements Serializable {
 
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -28,10 +28,10 @@ public class ProductInOrder implements Serializable {
     @Min(1)
     private Integer count;
 
-    @NotEmpty
+    @NotNull
     private String productDescription;
 
-    @NotEmpty
+
     private String productIcon;
 
     @NotEmpty
@@ -55,6 +55,17 @@ public class ProductInOrder implements Serializable {
     @JsonIgnore
     private OrderMain orderMain;
 
+    public ProductInOrder(ProductInfo productInfo, Integer quantity) {
+        this.productId = productInfo.getProductId();
+        this.productName = productInfo.getProductName();
+        this.productDescription = productInfo.getProductDescription();
+        this.productIcon = productInfo.getProductIcon();
+        this.categoryType = productInfo.getCategoryType();
+        this.productPrice = productInfo.getProductPrice();
+        this.productStock = productInfo.getProductStock();
+        this.count = quantity;
+    }
+
     @Override
     public String toString() {
         return "ProductInOrder{" +
@@ -68,5 +79,26 @@ public class ProductInOrder implements Serializable {
                 ", productPrice=" + productPrice +
                 ", productStock=" + productStock +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        ProductInOrder that = (ProductInOrder) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(productId, that.productId) &&
+                Objects.equals(productName, that.productName) &&
+                Objects.equals(productDescription, that.productDescription) &&
+                Objects.equals(productIcon, that.productIcon) &&
+                Objects.equals(categoryType, that.categoryType) &&
+                Objects.equals(productPrice, that.productPrice);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), id, productId, productName, productDescription, productIcon, categoryType, productPrice);
     }
 }

@@ -44,6 +44,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductInfo update(ProductInfo productInfo) {
+        // if null throw exception
         categoryService.findAllByCategoryType(productInfo.getCategoryType());
 
         if (productInfo.getProductStatus() > 1) {
@@ -60,5 +61,15 @@ public class ProductServiceImpl implements ProductService {
             throw new MyException(ResultEnum.PRODUCT_NOT_EXIST);
         }
         productInfoRepository.delete(one);
+    }
+
+    @Override
+    public void increaseStock(String productId, int amount) {
+        ProductInfo productInfo = productInfoRepository.findByProductId(productId);
+        if(productInfo==null){
+            throw new MyException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        productInfo.setProductStock(productInfo.getProductStock()+amount);
+        productInfoRepository.save(productInfo);
     }
 }

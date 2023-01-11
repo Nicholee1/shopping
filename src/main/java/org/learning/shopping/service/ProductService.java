@@ -19,4 +19,6 @@ public interface ProductService {
      ProductInfo update(ProductInfo productInfo);
 
      void delete(String id);
+
+     public void increaseStock(String productId, int amount);
 }
