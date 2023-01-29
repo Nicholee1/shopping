@@ -72,4 +72,16 @@ public class ProductServiceImpl implements ProductService {
         productInfo.setProductStock(productInfo.getProductStock()+amount);
         productInfoRepository.save(productInfo);
     }
+
+    @Override
+    public void decreaseStock(String productId, int amount) {
+        ProductInfo productInfo = productInfoRepository.findByProductId(productId);
+        if(productInfo==null){
+            throw new MyException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        int update = productInfo.getProductStock() - amount;
+        if(update <= 0) throw new MyException(ResultEnum.PRODUCT_NOT_ENOUGH );
+        productInfo.setProductStock(update);
+        productInfoRepository.save(productInfo);
+    }
 }

@@ -68,4 +68,14 @@ public class OrderMain implements Serializable {
                 ", updateTime=" + updateTime +
                 '}';
     }
+
+    public OrderMain(User buyer){
+        this.buyerEmail=buyer.getEmail();
+        this.buyerName=buyer.getName();
+        this.buyerAddress=buyer.getAddress();
+        this.buyerPhone=buyer.getPhone();
+        this.orderStatus=0;
+        this.orderAmount=buyer.getCart().getProducts().stream().map(item->item.getProductPrice().multiply(new BigDecimal(item.getCount())))
+                .reduce(BigDecimal::add).orElse(new BigDecimal(0));
+    }
 }
