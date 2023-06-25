@@ -9,10 +9,13 @@ import org.learning.shopping.service.CartService;
 import org.learning.shopping.service.ProductInOrderService;
 import org.learning.shopping.service.ProductService;
 import org.learning.shopping.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Collection;
 import java.util.Collections;
@@ -21,6 +24,7 @@ import java.util.Collections;
 @RestController
 @RequestMapping("/cart")
 public class CartController {
+    private static final Logger logger= LoggerFactory.getLogger(CartController.class);
 
     @Autowired
     UserService userService;
@@ -37,7 +41,6 @@ public class CartController {
     @GetMapping("")
     public Cart getCart(Principal principal) {
         User user = userService.findOne(principal.getName());
-
         return cartService.getCart(user);
 
     }

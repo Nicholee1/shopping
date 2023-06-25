@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import javax.sql.DataSource;
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity //实现web安全配置
 //依赖项，springConfig类必须在passwordEncoder创建之后创建
 @DependsOn("passwordEncoder")
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -44,6 +44,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private String rolesQuery;
 
 
+    //通过auth对象的方法添加身份验证
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -60,6 +61,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    //定义URL的访问权限
     @Override
     protected void configure(HttpSecurity http) throws Exception {  //认证拦截
         http.cors().and().csrf().disable()
@@ -76,6 +78,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
 
                 .and()
+                //异常处理
                 .exceptionHandling().authenticationEntryPoint(accessDenyHandler)
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); //session management

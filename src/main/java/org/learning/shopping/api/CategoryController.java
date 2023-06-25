@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.learning.shopping.vo.response.CategoryPage;
 
-import java.util.List;
 
-@RestController
-@Api
+@RestController //equals to @Controller+@ResponseBody , means will return json response body
+@Api //for swagger ui
 public class CategoryController {
 
     @Autowired

@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class ProductCategory implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue //primary key generate strategy
     private Integer categoryId;
 
     private String categoryName;

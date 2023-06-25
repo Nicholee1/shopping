@@ -4,6 +4,8 @@ import org.learning.shopping.entity.OrderMain;
 import org.learning.shopping.entity.ProductInOrder;
 import org.learning.shopping.service.OrderService;
 import org.learning.shopping.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +21,7 @@ import java.util.Set;
 @RestController
 @CrossOrigin
 public class OrderController {
-
+private static final Logger logger=LoggerFactory.getLogger(OrderController.class);
     @Autowired
     private UserService userService;
 
@@ -53,7 +55,7 @@ public class OrderController {
         return ResponseEntity.ok(orderMain);
     }
 
-    @PatchMapping("/order/finish/{id}")
+    @PatchMapping("/order/finish/{id}") //对entity进行局部更新
     public ResponseEntity<OrderMain> finish(@PathVariable("id") Long orderId, Authentication authentication){
         if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_CUSTOMER"))){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

@@ -38,8 +38,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User save(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public User save(User user) {  //save user, change pwd to encode pwd, initial cart for user
+        user.setPassword(passwordEncoder.encode(user.getPassword())); // password encode
         try{
             User savedUser = userRepository.save(user);
 
